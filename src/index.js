@@ -1,12 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./styles/styles.scss";
+import { Provider } from "react-redux";
+import { firebase } from "./firebase/firebase";
+import configureStore from "./store/";
+import AppRouter from "./routers/AppRouter";
+import { login } from "./actions/auth";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const store = configureStore();
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>,
+  document.getElementById("root")
+);
+
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    store.dispatch(login(user.uid));
+  } else {
+    console.log("Not logged in");
+  }
+});
