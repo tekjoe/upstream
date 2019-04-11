@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import CardGrid from "./CardGrid";
 
-const HomePage = ({ isAuthenticated }) => {
+const HomePage = ({ isAuthenticated, username }) => {
   return (
     <div>
       <section className="hero is-medium is-primary is-bold">
@@ -10,8 +10,12 @@ const HomePage = ({ isAuthenticated }) => {
           <div className="container">
             <h1 className="title">Welcome to UpStream.</h1>
             {isAuthenticated ? (
-              <h2 className="subtitle">Welcome back, user.</h2>
-            ) : null}
+              <h2 className="subtitle">Good to see you again, {username}.</h2>
+            ) : (
+              <h2 className="subtitle">
+                Create a profile to start your journey.
+              </h2>
+            )}
           </div>
         </div>
       </section>
@@ -22,7 +26,8 @@ const HomePage = ({ isAuthenticated }) => {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: !!state.auth.uid
+    isAuthenticated: !!state.auth.uid,
+    username: state.auth.username
   };
 };
 

@@ -22,3 +22,27 @@ export const addBlog = blog => ({
   type: "ADD_BLOG",
   blog
 });
+
+export const getBlogs = blogs => ({
+  type: "GET_BLOGS",
+  blogs
+});
+
+export const startGetBlogs = () => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database
+      .ref(`users/${uid}/blogs`)
+      .once("value")
+      .then(snapshot => {
+        const blogs = [];
+        snapshot.forEach(childSnapshot => {
+          blogs.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+          });
+        });
+        dispatch(getBlogs(blogs));
+      });
+  };
+};

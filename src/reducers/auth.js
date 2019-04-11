@@ -10,20 +10,32 @@ export default (state = [], action) => {
         userId
       };
     case "CREATE_USER_FAIL":
-      const { error } = action;
       return {
         ...state,
         loggedIn: false,
-        error
+        error: action.error
       };
+
     case "LOGIN":
       return {
         ...state,
         loggedIn: true,
-        uid: action.uid
+        uid: action.uid,
+        username: action.username,
+        profile: action.profile
       };
     case "LOGOUT":
       return {};
+    case "ADD_PROFILE":
+      return {
+        ...state,
+        profile: action.profile
+      };
+    case "GET_PROFILE":
+      return {
+        ...state,
+        profile: action.profile
+      };
     default:
       return state;
   }

@@ -5,7 +5,8 @@ import { Provider } from "react-redux";
 import { firebase } from "./firebase/firebase";
 import configureStore from "./store/";
 import AppRouter from "./routers/AppRouter";
-import { login } from "./actions/auth";
+import { login, startGetProfile } from "./actions/auth";
+import { startGetBlogs } from "./actions/blog";
 
 const store = configureStore();
 
@@ -18,8 +19,8 @@ ReactDOM.render(
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    store.dispatch(login(user.uid));
-  } else {
-    console.log("Not logged in");
+    store.dispatch(login(user.uid, user.displayName));
+    store.dispatch(startGetBlogs());
+    store.dispatch(startGetProfile());
   }
 });

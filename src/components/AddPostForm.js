@@ -16,7 +16,7 @@ class AddPostForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.startAddBlog(this.state);
-    this.props.history.push("/home");
+    this.props.history.push("/profile");
   };
   render() {
     return (

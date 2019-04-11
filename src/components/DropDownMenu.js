@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class DropDownMenu extends Component {
   state = {
@@ -27,16 +28,13 @@ export default class DropDownMenu extends Component {
         </div>
         <div className="dropdown-menu" id="dropdown-menu" role="menu">
           <div className="dropdown-content">
-            <a href="/" className="dropdown-item">
+            <Link to="/games/moba" className="dropdown-item">
               Moba
-            </a>
-            <a className="dropdown-item">Game</a>
-            <a href="/" className="dropdown-item">
+            </Link>
+
+            <Link to="/games/br" className="dropdown-item">
               Battle Royale
-            </a>
-            <a href="/" className="dropdown-item">
-              Game
-            </a>
+            </Link>
           </div>
         </div>
       </div>

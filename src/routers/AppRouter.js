@@ -7,10 +7,12 @@ import HomePage from "../components/HomePage";
 import Navbar from "../components/Navbar";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
-import DashboardPage from "../components/DashboardPage";
+import ProfilePage from "../components/ProfilePage";
 import AddPostPage from "../components/AddPostPage";
+import SettingsPage from "../components/SettingsPage";
+import UploadTest from "../components/UploadTest";
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 
 const AppRouter = () => (
   <Router history={history}>
@@ -22,7 +24,9 @@ const AppRouter = () => (
         <PrivateRoute path="/home" component={HomePage} />
         <PrivateRoute path="/add-post" component={AddPostPage} />
         <PublicRoute path="/login" component={LoginPage} />
-        <PrivateRoute path="/dashboard" component={DashboardPage} />
+        <Route path="/settings" component={SettingsPage} />
+        <Route path="/profile" component={ProfilePage} />
+        <Route path="/upload" component={UploadTest} />
       </Switch>
     </div>
   </Router>
